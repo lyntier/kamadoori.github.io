@@ -1,0 +1,14 @@
+<div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill"><%- date(page.date, "YYYY-MM-DD") %></a>
+        <% if (page.categories && page.categories.length){ %>
+            <%- list_categories(page.categories, {
+                show_count: false,
+                class: 'nexmoefont icon-appstore-fill ',
+                style: 'none',
+                separator: ''
+            }) %>
+        <% } %>
+        <%- partial('_partial/_post/word-count', {post: page}) %>
+    </div>
+</div>
