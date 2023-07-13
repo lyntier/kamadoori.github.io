@@ -143,10 +143,12 @@ Assets. Godot is lacking in code assets pretty severely, especially with a major
 - They are (usually) compatible between the two assets 
 - You can get them on so many different websites it's actually laughable
 
-One interesting one for me is trying to develop a game with PSX style limitations to it. Affine texture mapping, vertex warping, dithering, color depth reduction, all that good stuff. One massive issue I run into with both engines is the complete lack of support for hard edge shadows which seems so extremely silly to me. Unity of course has a solution int he Asset store and PFFFTTTT-
+One interesting one for me is trying to develop a game with PSX style limitations to it. Affine texture mapping, vertex warping, dithering, color depth reduction, all that good stuff. One massive issue I run into with both engines is the complete lack of support for hard edge shadows which seems so extremely silly to me. Unity of course has a solution in the Asset store and PFFFTTTT-
 
 ![](/img/unity-struggles/money.png)
 
 Yeah. I'm not spending that. It also only works with the Universal Rendering Pipeline. There aren't too many PSX games with stencil shadows but it's still an effect I absolutely adore. I guess using a shadow circle around the character would have to do. I think it can be done rather easily: cast a light on a separate layer on a mesh that's also on that layer, make the mesh invisible but the shadow cast not. I think that's feasible at least.
 
 So that kinda leaves me inbetween a rock and a hard place. I'm not adept with shaders, and learning to be would take a long time. Especially considering the difference in dialect between Godot's shading language and Unity's, and how both of these relate to GLSL/HLSL. Just working with Unity puts me in a sour mood, but at least I get to watch Interstellar today.
+
+*rev. 2023/07/13: spelling fix*
