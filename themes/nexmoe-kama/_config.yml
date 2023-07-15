@@ -28,7 +28,7 @@ widgets:
       options: 
         social:
             GitHub:
-                - https://github.com/nexmoe/
+                - https://github.com/kamadoori/
                 - icon-github
                 - rgb(200, 200, 200)
                 - rgba(200, 200, 200, .1)

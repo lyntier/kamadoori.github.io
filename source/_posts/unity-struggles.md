@@ -3,7 +3,7 @@ title: Unity Struggles
 cover: https://i.imgur.com/MFrjdFG.png
 coverHeight: 176
 coverWidth: 287
-date: 2023-07-13
+date: 2023-07-13 04:00:00
 ---
 
 I'm really starting to hate Unity. I have been using Unity on-and-off since somewhere around 2017.4 .
