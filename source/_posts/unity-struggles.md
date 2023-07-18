@@ -1,6 +1,6 @@
 ---
 title: Unity Struggles
-cover: https://i.imgur.com/MFrjdFG.png
+cover: /covers/unity-struggles.png
 coverHeight: 176
 coverWidth: 287
 date: 2023-07-13 04:00:00

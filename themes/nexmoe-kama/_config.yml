@@ -1,6 +1,6 @@
-avatar: https://i.imgur.com/1xhHemt.png
+avatar: /img/avatar.png
 background:
-    path: https://i.imgur.com/HN43l4I.png
+    path: /img/banner.png
     width: 1200
     height: 500
 favicon:
