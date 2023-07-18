@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en"><head>
+<title>Screen Shaders in Godot - funny blog</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="There are some premade options out there for PSX shaders in Godot. They allow you to apply materials to objects and apply shaders to the screen to emulate the rendering of the PSX. The premade options">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Screen Shaders in Godot">
+<meta property="og:url" content="https://kamadoori.github.io/2023/07/18/screen-shaders-in-godot/">
+<meta property="og:site_name" content="funny blog">
+<meta property="og:description" content="There are some premade options out there for PSX shaders in Godot. They allow you to apply materials to objects and apply shaders to the screen to emulate the rendering of the PSX. The premade options">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kamadoori.github.io/img/screen-shaders-in-godot/example_project.png">
+<meta property="og:image" content="https://kamadoori.github.io/img/screen-shaders-in-godot/grey_output.png">
+<meta property="og:image" content="https://kamadoori.github.io/img/screen-shaders-in-godot/success.png">
+<meta property="og:image" content="https://kamadoori.github.io/img/screen-shaders-in-godot/success2.png">
+<meta property="og:image" content="https://kamadoori.github.io/img/screen-shaders-in-godot/success3.png">
+<meta property="og:image" content="https://kamadoori.github.io/img/screen-shaders-in-godot/success4.png">
+<meta property="article:published_time" content="2023-07-18T12:00:00.000Z">
+<meta property="article:modified_time" content="2023-07-18T17:10:42.015Z">
+<meta property="article:author" content="Alice Vee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kamadoori.github.io/img/screen-shaders-in-godot/example_project.png">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1689700249132">
+
+<link rel="stylesheet" href="/css/style.css?v=1689700249132">
+
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1689700249133"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/img/banner.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Alice Vee"><img src="/img/avatar.png" alt="Alice Vee"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Alice Vee">
+            <img src="/img/avatar.png" alt="Alice Vee" alt="Alice Vee">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>3</div>
+        <div><span>Tags</span>0</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/kamadoori/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(200, 200, 200);
+				background-color: rgba(200, 200, 200, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/07/18/screen-shaders-in-godot/">Screen Shaders in Godot</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/13/unity-struggles/">Unity Struggles</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/hello-world/">zzz</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 37.35498839907193%;"> 
+            <img src="/covers/screen-shaders-in-godot.png" alt="Screen Shaders in Godot" loading="lazy">
+            <h1>Screen Shaders in Godot</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023-07-18</a>
+        
+        
+    </div>
+</div>
+
+    <p>There are some premade options out there for PSX shaders in Godot. They allow you to apply materials to objects and apply shaders to the screen to emulate the rendering of the PSX. The premade options were unfortunately either somewhat lacking or had to be converted to be compatible with Godot 4. Trying to convert them from Godot Shader Language 1 to 2 was dramatic and plagued me with issues, so instead I decided to learn how to write these shaders from scratch. That was a very interesting process to go through.</p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>First off, I set up a sample project. No skybox, simple texture on floor and ability to move around.</p>
+<p><img src="/img/screen-shaders-in-godot/example_project.png"></p>
+<p>Nearly immediately I run into a problem; Godot’s post-processing stack is kinda nasty.</p>
+<p>To add custom post processing, you have to have a node stack like this:</p>
+<pre class="language-none"><code class="language-none">CanvasLayer
+└── SubViewportContainer &lt;-- Contains Screen space shader
+    └── SubViewport
+        └── Camera</code></pre>
+
+<p>This doesn’t seem so bad, right? There are some problems with that though. Since your camera has to be under the viewport, you probably need your entire game under there. It’s manageable enough, although needs some finaggling when you’re loading other scenes, unless you are going to swap the entire scene out for another or pack your cameras into complete scenes with the CanvasLayers and SubViewports. Additionally, If you want to add another pass, you need another two nodes. The nodes are also in an initially illogical order.</p>
+<pre class="language-none"><code class="language-none">CanvasLayer
+└── SubViewportContainer &lt;-- Contains Second Pass
+    └── SubViewport
+        └── SubViewportContainer &lt;-- Contains First Pass
+            └── SubViewport
+                └── Camera</code></pre>
+
+<p>The order makes some sense if you think about the viewport containers as translucent sheets of plastic; you have your camera screen, then you put your first pass on it, then you put your second pass on that.</p>
+<p>Okay, so I have my stack set up correctly. Time for a completely innocuous shader, one pass, to test everything.</p>
+<pre class="language-glsl" data-language="glsl"><code class="language-glsl">shader_type canvas_item<span class="token punctuation">;</span>
+
+<span class="token keyword">uniform</span> <span class="token keyword">sampler2D</span> screen_texture<span class="token operator">:</span> hint_screen_texture<span class="token punctuation">,</span> filter_nearest<span class="token punctuation">,</span> repeat_disable<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">vec4</span> c <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>screen_texture<span class="token punctuation">,</span> SCREEN_UV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	COLOR <span class="token operator">=</span> c<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>Aaand…</p>
+<p><img src="/img/screen-shaders-in-godot/grey_output.png"></p>
+<p>…nothing.</p>
+<p>We browse the Godot shader reference. Surely there’s something I’m missing. From <a target="_blank" rel="noopener" href="https://docs.godotengine.org/en/stable/tutorials/shaders/custom_postprocessing.html">https://docs.godotengine.org/en/stable/tutorials/shaders/custom_postprocessing.html</a> :</p>
+<pre class="language-none"><code class="language-none">shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+&#x2F;&#x2F; Blurs the screen in the X-direction.
+void fragment() &#123;
+    vec3 col &#x3D; texture(screen_texture, SCREEN_UV).xyz * 0.16;
+    &#x2F;&#x2F; [snipped some blur calculations here]
+    COLOR.xyz &#x3D; col;
+&#125;</code></pre>
+
+<p>Okay.. I didn’t miss anything here I think. Maybe there’s just something about the alpha? Let’s try this.</p>
+<pre class="language-glsl" data-language="glsl"><code class="language-glsl">shader_type canvas_item<span class="token punctuation">;</span>
+
+<span class="token keyword">uniform</span> <span class="token keyword">sampler2D</span> screen_texture <span class="token operator">:</span> hint_screen_texture<span class="token punctuation">,</span> repeat_disable<span class="token punctuation">,</span> filter_nearest<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">vec3</span> c <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>screen_texture<span class="token punctuation">,</span> SCREEN_UV<span class="token punctuation">)</span><span class="token punctuation">.</span>xyz<span class="token punctuation">;</span>
+	COLOR <span class="token operator">=</span> c<span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>Nope, still a gray screen. After bashing rocks together for a little bit longer, I found that actually, <code>screen_texture</code> is not the right variable to use. Instead I found the following at <a target="_blank" rel="noopener" href="https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/canvas_item_shader.html">https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/canvas_item_shader.html</a> :</p>
+<blockquote>
+<table>
+<thead>
+<tr>
+<th>Built-In</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sampler2D <code>TEXTURE</code></td>
+<td>Default 2D texture.</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>So what do you think this contains? What does “default 2D texture” mean? Surely it’s not the screen texture, that should be in <code>screen_texture</code>, right?</p>
+<p>Nope. This is the right variable.</p>
+<pre class="language-glsl" data-language="glsl"><code class="language-glsl">shader_type canvas_item<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">vec3</span> c <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>TEXTURE<span class="token punctuation">,</span> SCREEN_UV<span class="token punctuation">)</span><span class="token punctuation">.</span>xyz<span class="token punctuation">;</span>
+	COLOR <span class="token operator">=</span> c<span class="token punctuation">.</span>rgb<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p><img src="/img/screen-shaders-in-godot/success.png"></p>
+<p>Hooray, output.</p>
+<p>I wasn’t too happy at this point to be completely honest. The fact that the first sample on the wiki doesn’t work is very annoying, and something I alluded to when talking about Unity previously. At least I can get started on writing screen shaders now. Just a quick check that I’m not totally crazy:</p>
+<pre class="language-glsl" data-language="glsl"><code class="language-glsl"><span class="token keyword">void</span> <span class="token function">fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">vec4</span> c <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>TEXTURE<span class="token punctuation">,</span> SCREEN_UV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    COLOR <span class="token operator">=</span> <span class="token keyword">vec4</span><span class="token punctuation">(</span>FRAGCOORD<span class="token punctuation">.</span>x <span class="token operator">*</span> SCREEN_PIXEL_SIZE<span class="token punctuation">.</span>x<span class="token punctuation">,</span> FRAGCOORD<span class="token punctuation">.</span>y <span class="token operator">*</span> SCREEN_PIXEL_SIZE<span class="token punctuation">.</span>y<span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> c<span class="token punctuation">.</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p><img src="/img/screen-shaders-in-godot/success2.png"></p>
+<p>How lovely. How about some quantization?</p>
+<pre class="language-glsl" data-language="glsl"><code class="language-glsl"><span class="token keyword">const</span> <span class="token keyword">float</span> STEPS <span class="token operator">=</span> <span class="token number">8.0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">vec2</span> approx <span class="token operator">=</span> <span class="token function">floor</span><span class="token punctuation">(</span>FRAGCOORD<span class="token punctuation">.</span>xy <span class="token operator">*</span> SCREEN_PIXEL_SIZE <span class="token operator">*</span> <span class="token keyword">vec2</span><span class="token punctuation">(</span>STEPS<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token keyword">vec2</span><span class="token punctuation">(</span>STEPS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    COLOR<span class="token punctuation">.</span>rgb <span class="token operator">=</span> <span class="token keyword">vec3</span><span class="token punctuation">(</span>approx<span class="token punctuation">,</span> <span class="token number">255.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p><img src="/img/screen-shaders-in-godot/success3.png"></p>
+<p>Now that this is working, let’s finally try applying an effect to the actual screen texture.</p>
+<pre class="language-glsl" data-language="glsl"><code class="language-glsl"><span class="token keyword">const</span> <span class="token keyword">float</span> STEP <span class="token operator">=</span> <span class="token number">8.0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">fragment</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">vec4</span> c <span class="token operator">=</span> <span class="token function">texture</span><span class="token punctuation">(</span>TEXTURE<span class="token punctuation">,</span> SCREEN_UV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">vec4</span> rounded <span class="token operator">=</span> <span class="token function">floor</span><span class="token punctuation">(</span>c <span class="token operator">*</span> STEP<span class="token punctuation">)</span> <span class="token operator">/</span> STEP<span class="token punctuation">;</span>
+	
+	COLOR <span class="token operator">=</span> rounded<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p><img src="/img/screen-shaders-in-godot/success4.png"></p>
+<p>All good. Now I can work on creating my own shaders. I’ll have to look into how to apply dithering to a picture via screen space shaders, as that’s what the original PS1 did. </p>
+
+  </article>
+
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1689700249113"></script>
+  
+
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Getting-Started"><span class="toc-number">1.</span> <span class="toc-text">Getting Started</span></a></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div></body></html>
