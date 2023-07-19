@@ -59,7 +59,7 @@ Aaand...
 
 We browse the Godot shader reference. Surely there's something I'm missing. From https://docs.godotengine.org/en/stable/tutorials/shaders/custom_postprocessing.html :
 
-```
+```glsl
 shader_type canvas_item;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
