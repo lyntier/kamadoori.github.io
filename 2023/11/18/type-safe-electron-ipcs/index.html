@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en"><head>
+<title>Type-safe Electron IPCs - funny blog</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="Typescript is awesome. Electron, not so much I think. Tauri is generally considered the superior option, as it’s faster, you can write code in a supposedly more enjoyable language and it provides smal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Type-safe Electron IPCs">
+<meta property="og:url" content="https://kamadoori.github.io/2023/11/18/type-safe-electron-ipcs/">
+<meta property="og:site_name" content="funny blog">
+<meta property="og:description" content="Typescript is awesome. Electron, not so much I think. Tauri is generally considered the superior option, as it’s faster, you can write code in a supposedly more enjoyable language and it provides smal">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-18T19:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-20T22:53:24.422Z">
+<meta property="article:author" content="Alice Vee">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1700520812784">
+
+<link rel="stylesheet" href="/css/style.css?v=1700520812784">
+
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1700520812784"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/img/banner.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Alice Vee"><img src="/img/avatar.png" alt="Alice Vee"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Alice Vee">
+            <img src="/img/avatar.png" alt="Alice Vee" alt="Alice Vee">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>4</div>
+        <div><span>Tags</span>0</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/kamadoori/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(200, 200, 200);
+				background-color: rgba(200, 200, 200, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/11/18/type-safe-electron-ipcs/">Type-safe Electron IPCs</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/18/screen-shaders-in-godot/">Screen Shaders in Godot</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/13/unity-struggles/">Unity Struggles</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/hello-world/">zzz</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 190.47619047619045%;"> 
+            <img src="/covers/type-safe-electron-ipcs.png" alt="Type-safe Electron IPCs" loading="lazy">
+            <h1>Type-safe Electron IPCs</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023-11-18</a>
+        
+        
+    </div>
+</div>
+
+    <p>Typescript is awesome. Electron, not so much I think. Tauri is generally considered the superior option, as it’s faster, you can write code in a <em>supposedly</em> more enjoyable language and it provides smaller package sizes. However, Electron’s benefit is that your codebase can exist with only a single language used in it.</p>
+<p>There is a problem whenever you try to incorporate a browser window as an application with any software, and that is protection of the user’s device. With Chromium-based browsers and applications, you are sandboxing the rendering window from the rest of your OS, only allowing certain calls to send data to and retrieve data from the OS. Electron enables this with their own IPC implementation. IPC, or Inter-Process Communication, allows two separate processes to share data with one another. Electron needs to do this, as the part of the package that handles interaction with the computer (application menu, dialogs) is otherwise completely separated from the rendering part of the application (your website-turned-windows-app).</p>
+<p>The electron IPC implementation is not too difficult to wrap your head around. You have three components to it: your <code>main</code> file (main process), your <code>preload</code> file (main process) and your html&#x2F;js side (renderer process). To create an IPC channel between your main process and rendering process, you have to insert code in all three of these files. There are two ways to do so, but I will only explore the modern two-way approach of sending&#x2F;receiving data to and from the main process.</p>
+<p>First, the <code>main.js</code> file. This is what a cut-down version of your <code>main.js</code> may look like:</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> app<span class="token punctuation">,</span> BrowserWindow<span class="token punctuation">,</span> ipcMain <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"electron"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> path <span class="token keyword">from</span> <span class="token string">"node:path"</span><span class="token punctuation">;</span>
+
+app<span class="token punctuation">.</span><span class="token function">whenReady</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  ipcMain<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span><span class="token string">"doThing"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">event<span class="token punctuation">,</span> args</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">await</span> <span class="token function">doThing</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* Do something that requires access to your OS (filesystem, registry etc) here */</span>
+    <span class="token keyword">return</span> <span class="token string">"done"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> mainWindow <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BrowserWindow</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">webPreferences</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">preload</span><span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">"preload.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<p>Quite simple. You have what’s essentially an event listener waiting for a call to the <code>doThing</code> channel, it does a thing, then it sends back the result. By making it async we don’t have to fiddle around with callbacks quite the same way; bless modern Javascript features.</p>
+<p>Now, <code>preload.js</code>. This is not actually a cut-down version, your preload can be quite small:</p>
+<pre class="language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> contextBridge<span class="token punctuation">,</span> ipcRenderer <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">"electron"</span><span class="token punctuation">;</span>
+
+contextBridge<span class="token punctuation">.</span><span class="token function">exposeInMainWorld</span><span class="token punctuation">(</span><span class="token string">"electronAPI"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  <span class="token function-variable function">doThing</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> ipcRenderer<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token string">"doThing"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<p>So what does this do? The function name <code>exposeInMainWorld</code> should serve as somewhat of an indication, but to be specific, this puts an <code>electronAPI</code> object onto the renderer process’s <code>window</code> object. The <code>electronAPI</code> object will contain all properties of the object passed as the second parameter, allowing the renderer thread to call these specific methods (and <em>ONLY</em> these methods, for safety).</p>
+<p>Usage of these methods becomes clear if we look at any file in the actual website that wants to use it, so let’s make a very simple <code>index.html</code>:</p>
+<pre class="language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Site<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stuff-in-here<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Stuff!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>btn<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Click me!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">defer</span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
+      <span class="token keyword">const</span> p <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"stuff-in-here"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">const</span> btn <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"btn"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      btn<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">"click"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> returnedValue <span class="token operator">=</span> <span class="token keyword">await</span> window<span class="token punctuation">.</span>electronAPI<span class="token punctuation">.</span><span class="token function">doThing</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        p<span class="token punctuation">.</span>innerText <span class="token operator">=</span> returnedValue<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+
+<p>A simple setup; we have a button, and when you click it, <code>doThing()</code> is called, and the value you get back from it is put in the only paragraph element. These are the three elements there are to Electron IPC.</p>
+<p>There’s one big problem to this approach however and that is type safety. I’m creating a Nuxt 3 application, which uses Typescript for everything. I want to make sure that the types I send and retrieve are of a certain value type, and I want to be able to use that type safety in my frontend code as well as in my Electron code. How do I go about this?</p>
+<p>I have not gotten too far into this, but I have found a semi-solution that works for me. I have added a few pieces of code, some of it specifically available to Electron:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// in Electron's main.ts:</span>
+<span class="token keyword">function</span> <span class="token function">addIpcMainHandler</span><span class="token punctuation">(</span>
+  channel<span class="token operator">:</span> AllowedChannels<span class="token punctuation">,</span>
+  func<span class="token operator">:</span> ElectronApiFunction
+<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  ipcMain<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span>channel<span class="token punctuation">,</span> func<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// Then, in the bootstrapping process:</span>
+<span class="token function">addIpcMainHandler</span><span class="token punctuation">(</span><span class="token string">"doThing"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">doSomethingWithLocalFs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// in Electron's preload.ts:</span>
+<span class="token keyword">function</span> <span class="token function">addIpcRendererHandler</span><span class="token punctuation">(</span>api<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> channel<span class="token operator">:</span> AllowedChannels<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  api<span class="token punctuation">[</span>channel<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=></span> ipcRenderer<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>channel<span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">const</span> api <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">addIpcRendererHandler</span><span class="token punctuation">(</span>api<span class="token punctuation">,</span> <span class="token string">"doThing"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+contextBridge<span class="token punctuation">.</span><span class="token function">exposeInMainWorld</span><span class="token punctuation">(</span><span class="token string">"ElectronAPI"</span><span class="token punctuation">,</span> api<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<p>This doesn’t look <em>too</em> type-safe yet, does it? Here is where my <code>shared/</code> folder comes in:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// shared/ipc/channels.ts:</span>
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">AllowedChannels</span> <span class="token operator">=</span> <span class="token string">"doThing"</span> <span class="token operator">|</span> <span class="token string">"doOtherThing"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ElectronApiFunction</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">declare</span> global <span class="token punctuation">&#123;</span>
+  <span class="token keyword">interface</span> <span class="token class-name">Window</span> <span class="token punctuation">&#123;</span>
+    ElectronAPI<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token punctuation">[</span>key <span class="token keyword">in</span> AllowedChannels<span class="token punctuation">]</span><span class="token operator">:</span> ElectronApiFunction<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>If you don’t know a lot about Typescript, this may be a bit confusing, so let’s break down what’s happening here.</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ElectronApiFunction</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>This is the signature that Electron IPC methods follow if you’re using asynchronous methods for them; anything can be a parameter, there can be any parameters, and anything can be returned from them (but in my case, it has to be a Promise). This is because I am only using Electron IPCs with two-way binding. If I used one-way binding, they’d all return <code>void</code> since they’re just calls to the main process to do something. This is mostly for niceness in <code>main.ts</code> and in any of my rendered files. It doesn’t actually <em>do</em> much in <code>main.ts</code> though, since <code>ipcMain.handle</code> already provides the typings for its own method.</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">AllowedChannels</span> <span class="token operator">=</span> <span class="token string">"doThing"</span> <span class="token operator">|</span> <span class="token string">"doOtherThing"</span><span class="token punctuation">;</span></code></pre>
+
+<p>This provides some really nice type-checking on my IPC channels though. Let’s look back at my <code>preload.ts</code> for a second:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// no error</span>
+<span class="token function">addIpcRendererHandler</span><span class="token punctuation">(</span>api<span class="token punctuation">,</span> <span class="token string">"doThing"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Argument of type '"foo"' is not assignable to parameter of type 'AllowedChannels'.</span>
+<span class="token comment">//                         vvvvv</span>
+<span class="token function">addIpcRendererHandler</span><span class="token punctuation">(</span>api<span class="token punctuation">,</span> <span class="token string">"foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<p>Great. I don’t have to worry about misspelling this string throughout my application anymore. If I do, my linter will just spit out an error!</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">declare</span> global <span class="token punctuation">&#123;</span>
+  <span class="token keyword">interface</span> <span class="token class-name">Window</span> <span class="token punctuation">&#123;</span>
+    ElectronAPI<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+      <span class="token punctuation">[</span>key <span class="token keyword">in</span> AllowedChannels<span class="token punctuation">]</span><span class="token operator">:</span> ElectronAPIFunction<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>This is <em>really</em> nice for your renderer process code. This piece of code essentially tells your linter “Hey, actually the window object <em>will</em> have an <code>ElectronAPI</code> property object attached to it, and this object will contain properties according to all strings in the <code>AllowedChannels</code> type, and these are all functions”. This means that in my renderer thread I can simply call <code>window.ElectronAPI.doThing()</code> and my linter will be okay with it despite me never actually having directly added anything to the <code>window</code> object. If I <em>don’t</em> add the above piece of code to my codebase, my linter will say “Property <code>ElectronAPI</code> does not exist on type <code>Window &amp; typeof globalThis</code>“. I can still call these functions though. The reason they still work is because we did put those functions on the window object, in <code>preload.ts</code>. Our editor just doesn’t know about that.</p>
+<p>So, what does this look like when I actually use these typed calls? Anywhere in my renderer process, I can simply call</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> window<span class="token punctuation">.</span>ElectronAPI<span class="token punctuation">.</span><span class="token function">doThing</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<p>…and everything just works now.</p>
+<p>One weird thing that I did run into is my default Electron configuration not working properly for setting up ipc channels. My Electron BrowserWindow object actually had <code>contextIsolation</code> set to <code>false</code> by default, which meant I could not use <code>contextBridge.exposeInMainWorld</code> in my application. I could also not directly set the <code>window</code> properties in <code>preload.ts</code>, which supposedly was the reason <code>contextIsolation</code> existed as an option in the first place. I had to re-enable it in the options to be able to expose the functions to the <code>window</code> object, but then it worked fine.</p>
+<p>For now, that’s as far as I have gotten with type safety in Electron. What I want to work on more is being able to define the correct signature for the functions I’m calling and have those return types show up in my editor as well (if <code>window.ElectronAPI.doThing()</code> is supposed to return a string, then I want vscode to give me an error if I don’t treat the return value as one). That’s something left for next time though. Now I have to deep dive into CSS hell to figure out how I am going to style this application I’m working on.</p>
+
+  </article>
+
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1700520812773"></script>
+  
+
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div></body></html>
