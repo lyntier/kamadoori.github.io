@@ -82,7 +82,7 @@ uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_n
 
 void fragment() {
 	vec3 c = texture(screen_texture, SCREEN_UV).xyz;
-	COLOR = c.rgb;
+	COLOR.rgb = c.rgb;
 }
 ```
 
@@ -100,7 +100,7 @@ Nope. This is the right variable.
 shader_type canvas_item;
 
 void fragment() {
-	vec3 c = texture(TEXTURE, SCREEN_UV).xyz;
+	vec3 c = texture(TEXTURE, SCREEN_UV).rgb;
 	COLOR = c.rgb;
 }
 ```
