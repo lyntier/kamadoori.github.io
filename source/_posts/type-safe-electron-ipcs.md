@@ -1,8 +1,8 @@
 ---
 title: Type-safe Electron IPCs
 cover: /covers/type-safe-electron-ipcs.png
-coverHeight: 1200
-coverWidth: 630
+coverHeight: 400
+coverWidth: 210
 date: 2023-11-18 20:00:00
 ---
 
