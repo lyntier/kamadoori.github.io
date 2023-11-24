@@ -27,6 +27,12 @@ if (is_archive()){
     'lib/mdui_043tiny/mdui.css'
 ]) %>
 
+<meta name="og:site_name" content="el blog kamadoori" />
+<meta property="og:description" content="programming rants!" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<%= page.title %>" />
+<meta property="og:image" content="<%= url_for('ogimage/ogimage.png') %>" />
+
 <%- css_auto_version('lib/iconfont/iconfont.css') %>
 <% if (theme.iconlib) { %>
     <link rel="stylesheet" href="<%= theme.iconlib %>">
