@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en"><head>
+<title>Even better type-safe Electron IPCs - funny blog</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="Woo! Type-safety has been achieved! And I managed to also completely generalize it. If I want to add a method to the API, I simply need to add the signature to the interface and the implementation to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Even better type-safe Electron IPCs">
+<meta property="og:url" content="https://kamadoori.github.io/2023/11/24/even-better-type-safe-electron-ipcs/">
+<meta property="og:site_name" content="funny blog">
+<meta property="og:description" content="Woo! Type-safety has been achieved! And I managed to also completely generalize it. If I want to add a method to the API, I simply need to add the signature to the interface and the implementation to">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-24T19:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-24T21:00:30.764Z">
+<meta property="article:author" content="Alice Vee">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1700859641512">
+
+<link rel="stylesheet" href="/css/style.css?v=1700859641512">
+
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1700859641513"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/img/banner.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Alice Vee"><img src="/img/avatar.png" alt="Alice Vee"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Alice Vee">
+            <img src="/img/avatar.png" alt="Alice Vee" alt="Alice Vee">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>5</div>
+        <div><span>Tags</span>0</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/kamadoori/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(200, 200, 200);
+				background-color: rgba(200, 200, 200, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/11/24/even-better-type-safe-electron-ipcs/">Even better type-safe Electron IPCs</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/18/type-safe-electron-ipcs/">Type-safe Electron IPCs</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/18/screen-shaders-in-godot/">Screen Shaders in Godot</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/13/unity-struggles/">Unity Struggles</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/11/hello-world/">zzz</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 52.5%;"> 
+            <img src="/covers/even-better-type-safe-electron-ipcs.png" alt="Even better type-safe Electron IPCs" loading="lazy">
+            <h1>Even better type-safe Electron IPCs</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023-11-24</a>
+        
+        
+    </div>
+</div>
+
+    <p>Woo! Type-safety has been achieved! And I managed to also completely generalize it. If I want to add a method to the API, I simply need to add the signature to the interface and the implementation to an object. Everything else remains as it has been!</p>
+<p>The last time I looked at this, I closed the ordeal by saying “You cannot use any functions with names that aren’t in this type, hooray” and basically left it at that. Thing is, Typescript’s type system is SO much more flexible than that, and there’s so much more to discover. So what changed since last time?</p>
+<h2 id="Type-mapping"><a href="#Type-mapping" class="headerlink" title="Type mapping"></a>Type mapping</h2><p>I look a look at type mapping. Let’s say I write a function signature:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">type</span> <span class="token class-name">doThing</span> <span class="token operator">=</span> <span class="token punctuation">(</span>foo<span class="token operator">:</span> Foo<span class="token punctuation">,</span> bar<span class="token operator">:</span> Bar<span class="token punctuation">)</span> <span class="token operator">=></span> Baz<span class="token punctuation">;</span></code></pre>
+
+<p>What if I want to have a version of this signature, but <em>not</em> include the <code>foo</code> parameter? The simple solution would just be to create another type:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">type</span> <span class="token class-name">doAnotherThing</span> <span class="token operator">=</span> <span class="token punctuation">(</span>bar<span class="token operator">:</span> Bar<span class="token punctuation">)</span> <span class="token operator">=></span> Baz<span class="token punctuation">;</span></code></pre>
+
+<p>This works.. but if I have multiple functions that I want to treat this way, obviously that’s not really a way to go about it. This is where type mapping comes handy. With type mapping, you can create types that are based on other types:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">type</span> <span class="token class-name">HasPropsWithTypeString</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  foo<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// We can map this to give back other data types instead:</span>
+<span class="token keyword">type</span> <span class="token class-name">HasPropsWithTypeNumber</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">[</span>someKey <span class="token keyword">in</span> <span class="token keyword">keyof</span> HasPropsWithTypeString<span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<p>What this code does is take all keys from <code>HasPropsWithTypeString</code> and say that an object with this new type will return numbers when these keys are addressed. Typescript now treats objects with this type as having a prop <code>foo</code> that’s a number. Even better when constructing an object of this type, having a <code>foo</code> number prop becomes a <strong>requirement</strong>. If you do not include it, Typescript will let you know: <code>Property &#39;foo&#39; is missing in type &#39;&#123;&#125;&#39; but required in type &#39;givesN&#39;.</code></p>
+<p>So what if we apply that to our own API?</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ElectronAPI</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">doThing</span><span class="token punctuation">(</span>event<span class="token operator">:</span> IpcMainInvokeEvent<span class="token punctuation">,</span> someArgument<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+  <span class="token function">doAnotherThing</span><span class="token punctuation">(</span>event<span class="token operator">:</span> IpcMainInvokeEvent<span class="token punctuation">,</span> anotherArgument<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">doThirdThing</span><span class="token punctuation">(</span>event<span class="token operator">:</span> IpcMainInvokeEvent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p>Relatively standard API example. Now, I’ve got this magic prop eraser type, it’ll remove the first prop from these methods:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">type</span> <span class="token class-name">RemoveEvent<span class="token operator">&lt;</span>Fun<span class="token operator">></span></span> <span class="token operator">=</span> Fun <span class="token keyword">extends</span> <span class="token punctuation">(</span>
+  event<span class="token operator">:</span> IpcMainInvokeEvent<span class="token punctuation">,</span>
+  <span class="token operator">...</span>args<span class="token operator">:</span> <span class="token keyword">infer</span> Param
+<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">infer</span> Result
+  <span class="token operator">?</span> <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> Param<span class="token punctuation">)</span> <span class="token operator">=></span> Result
+  <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">;</span></code></pre>
+
+<p>This is a bit more of an advanced mapping, so let’s go over it.</p>
+<p><code>RemoveEvent&lt;Fun&gt;</code> &#x3D;&gt; Generic types. This generic type is named <code>Fun</code> here, after Function. Not after enjoyment, we’re still programmers, so we don’t get to have fun.</p>
+<p><code>Fun extends (/* snip */) =&gt;</code> &#x3D;&gt; Conditional typing. This allows you to map a type depending on what’s incoming. In this case, if the incoming type is a type that starts with an <code>event</code> parameter of type <code>IpcMainInvokeEvent</code>, then it maps to the type after the <code>?</code>, otherwise it maps to the type after the <code>:</code>. This is exactly the same as a ternary operator.</p>
+<p><code>infer Param</code>, <code>infer Result</code> &#x3D;&gt; Tells Typescript to infer the type that these two things are based on the context. So if a function with a signature of <code>(event: IpcMainInvokeEvent, foo: number): string</code> came in, <code>Param</code> will be inferred to be <code>(foo: string)</code>, and <code>Result</code> will be inferred to be <code>string</code>.</p>
+<p><code>never</code> &#x3D;&gt; declare that this situation should not occur. In other words, if our function does not match the pattern of the <code>extends</code> type, we are intentionally making this type useless.</p>
+<p>So how do we use this now? We can simply pass in functions to the type parameter:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// Note: Can't access these properties with dot notation. However, there is type safety on the linter for bracket notation.</span>
+<span class="token keyword">type</span> <span class="token class-name">doThingMapped</span> <span class="token operator">=</span> RemoveEvent<span class="token operator">&lt;</span>ElectronAPI<span class="token punctuation">[</span><span class="token string">"doThing"</span><span class="token punctuation">]</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token keyword">type</span> <span class="token class-name">doAnotherThingMapped</span> <span class="token operator">=</span> RemoveEvent<span class="token operator">&lt;</span>ElectronAPI<span class="token punctuation">[</span><span class="token string">"doAnotherThing"</span><span class="token punctuation">]</span><span class="token operator">></span><span class="token punctuation">;</span></code></pre>
+
+<p>If a function now uses this as its type, it’ll show the exact same parameters and return type as the original, <em>without</em> the event parameter. Cool, huh? Though, this could be applied a little bit more generic instead…</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">ElectronRendererAPI</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">[</span>key <span class="token keyword">in</span> <span class="token keyword">keyof</span> ElectronAPI<span class="token punctuation">]</span><span class="token operator">:</span> RemoveEvent<span class="token operator">&lt;</span>ElectronAPI<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<p>Beautiful. This will essentially map all existing functions in <code>ElectronAPI</code> to the <code>RemoveEvent</code> type, passing the current function in as parameter. It turns out that <code>key</code> is actually defined (and usable) as variable here, so using it in this manner means that you simply select the property!</p>
+<p>Now I can do the same thing for the Main thread of the application. When Electron ipc methods are called, they put all arguments in a rest parameter, which is an array of type <code>any</code>. You have to destructure this yourself again, but you do want the right type hints to exist in the main-thread part of the code still. If you don’t type <code>args</code> as <code>any[]</code>, you can’t access it as an array with type hinting. So, let’s do the same trick, but instead of mapping it so it removes the <code>event</code> parameter, let’s map it so it instead removes every other parameter and adds an <code>...args</code> parameter:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">type</span> <span class="token class-name">RemoveParams<span class="token operator">&lt;</span>Fun<span class="token operator">></span></span> <span class="token operator">=</span> Fun <span class="token keyword">extends</span> <span class="token punctuation">(</span>
+  event<span class="token operator">:</span> IpcMainInvokeEvent<span class="token punctuation">,</span>
+  <span class="token operator">...</span>args<span class="token operator">:</span> <span class="token keyword">infer</span> Param
+<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token keyword">infer</span> Result
+  <span class="token operator">?</span> <span class="token punctuation">(</span>event<span class="token operator">:</span> IpcMainInvokeEvent<span class="token punctuation">,</span> <span class="token operator">...</span>args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=></span> Result
+  <span class="token operator">:</span> <span class="token builtin">never</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">ElectronMainAPI</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">[</span>key <span class="token keyword">in</span> <span class="token keyword">keyof</span> ElectronAPI<span class="token punctuation">]</span><span class="token operator">:</span> RemoveParams<span class="token operator">&lt;</span>ElectronAPI<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<p>And that’s what my <code>channels.ts</code> file now looks like! To define the API on the main thread side:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">const</span> api<span class="token operator">:</span> ElectronMainAPI <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// Note: Automatic type hinting on the parameters and return type!</span>
+  <span class="token function-variable function">doThing</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>_event<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> arg1 <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">doSomethingAsync</span><span class="token punctuation">(</span>arg1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">.</span>success<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token comment">/* Snip: define the other methods here too */</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<p>In my <code>main.ts</code>, to register handlers:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript">Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>api<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  ipcMain<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> api<span class="token punctuation">[</span>key <span class="token keyword">as</span> <span class="token keyword">keyof</span> ElectronAPI<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<p>Then in my <code>preload.ts</code>, to expose the methods in the renderer thread:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// This is simply an object we load up with `invoke` calls for all the ipc channels by reading the original `api` object and applying the functions from that to this.</span>
+<span class="token keyword">const</span> exposed <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token keyword">as</span> ElectronRendererAPI<span class="token punctuation">;</span>
+
+Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>api<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  exposed<span class="token punctuation">[</span>key <span class="token keyword">as</span> <span class="token keyword">keyof</span> ElectronRendererAPI<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=></span>
+    ipcRenderer<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span>key<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+contextBridge<span class="token punctuation">.</span><span class="token function">exposeInMainWorld</span><span class="token punctuation">(</span><span class="token string">"ElectronAPI"</span><span class="token punctuation">,</span> exposed<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<p>And that’s it. Completely generalized and (almost) completely typed Electron ipc API. The only missing link is easier typing for called ipc methods in the main thread, where now everything is stuffed inside of an <code>args</code> argument, but I am unsure on how to fix that. Maybe instead pass in an <code>options</code> object, and always destructure the first argument in the <code>args</code> object to match a predefined type for every function in <code>ElectronAPI</code>? It might be possible, but I am going to stop here. Parsing arguments is a very minor holdup and not very sensitive to <em>syntax</em> errors, instead being sensitive to <em>symantic</em> errors. I’m happy with what I achieved here.</p>
+
+  </article>
+
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1700859641500"></script>
+  
+
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-mapping"><span class="toc-number">1.</span> <span class="toc-text">Type mapping</span></a></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div></body></html>
