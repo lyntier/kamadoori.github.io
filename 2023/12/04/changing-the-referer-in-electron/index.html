@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en"><head>
+<title>Changing the Referer in Electron - funny blog</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta name="description" content="Sometimes you want to change things you shouldn’t. Sometimes you are actively prevented from changing those things by the software you’re using. One of those things is the Referer header. The Referer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Changing the Referer in Electron">
+<meta property="og:url" content="https://kamadoori.github.io/2023/12/04/changing-the-referer-in-electron/">
+<meta property="og:site_name" content="funny blog">
+<meta property="og:description" content="Sometimes you want to change things you shouldn’t. Sometimes you are actively prevented from changing those things by the software you’re using. One of those things is the Referer header. The Referer">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-04T22:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-03T23:37:44.164Z">
+<meta property="article:author" content="Alice Vee">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<meta name="og:site_name" content="el blog kamadoori" />
+<meta property="og:description" content="programming rants!" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Changing the Referer in Electron" />
+<meta property="og:image" content="/ogimage/ogimage.png" />
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1701646673073">
+
+<link rel="stylesheet" href="/css/style.css?v=1701646673073">
+
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1701646673074"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/img/banner.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Alice Vee"><img src="/img/avatar.png" alt="Alice Vee"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Alice Vee">
+            <img src="/img/avatar.png" alt="Alice Vee" alt="Alice Vee">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>6</div>
+        <div><span>Tags</span>0</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/kamadoori/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(200, 200, 200);
+				background-color: rgba(200, 200, 200, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Recent Posts</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/12/04/changing-the-referer-in-electron/">Changing the Referer in Electron</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/24/even-better-type-safe-electron-ipcs/">Even better type-safe Electron IPCs</a>
+          </li>
+        
+          <li>
+            <a href="/2023/11/18/type-safe-electron-ipcs/">Type-safe Electron IPCs</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/18/screen-shaders-in-godot/">Screen Shaders in Godot</a>
+          </li>
+        
+          <li>
+            <a href="/2023/07/13/unity-struggles/">Unity Struggles</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+   
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 52.5%;"> 
+            <img src="/covers/changing-the-referer-in-electron.png" alt="Changing the Referer in Electron" loading="lazy">
+            <h1>Changing the Referer in Electron</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023-12-04</a>
+        
+        
+    </div>
+</div>
+
+    <p>Sometimes you want to change things you shouldn’t. Sometimes you are actively prevented from changing those things by the software you’re using. One of those things is the <code>Referer</code> header.</p>
+<p>The <code>Referer</code> header, which is not a word and supposed to be spelled ‘referrer’ (check RFC 1945 section 10.13 <a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/html/rfc1945#section-10.13">here</a>), tells the webpage that is receiving a request from which hostname that request originated. As per the words of this RFC, “This allows a server to generate lists of back-links to resources for interest, logging, optimized caching, etc.”. I am not interested in those things per se; what I am more interested in is sites using the <code>Referer</code> header to allow&#x2F;block traffic. When I build a scraper for example, I am performing a request that comes directly from my client, and this will be reflected in the header as being sent from <code>https://localhost:&#123;port&#125;/</code>. When this happens, the server returns a 403 and I am sad.</p>
+<p>So what are your options? First I tried setting the header in the request:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+  headers<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"Referer"</span><span class="token punctuation">,</span> someValidReferer<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 403 Forbidden</span></code></pre>
+
+<p>Still forbidden, because the header is still actually set to <code>https://localhost:&#123;port&#125;/</code>..</p>
+<p>I could list all the things I tried, such as setting the <code>window</code> history but really Chrome just doesn’t <em>allow</em> you to set the referrer. You can use an extension, but that’s not really feasible in Electron. So, what <em>is</em> feasible?</p>
+<p>The problem you’re running into is that Electron’s browser is not allowing you to change the referrer, but what if you didn’t make your network call from the browser? Simply let Electron’s main thread handle the network call. If you’d like to read more about IPCs, I’ve made two posts before about it <a href="https://kamadoori.github.io/2023/11/18/type-safe-electron-ipcs/">here</a> and <a href="/2023/11/24/even-better-type-safe-electron-ipcs/">here</a>.</p>
+<p>I add a new channel:</p>
+<pre class="language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ElectronAPI</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// ...</span>
+  <span class="token function">fetchWithReferer</span><span class="token punctuation">(</span>
+    event<span class="token operator">:</span> IpcMainInvokeEvent<span class="token punctuation">,</span>
+    url<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
+    referer<span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>ArrayBufferLike <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> api<span class="token operator">:</span> ElectronMainAPI <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">// ...</span>
+  fetchWithReferer<span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>
+    _event<span class="token punctuation">,</span>
+    args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>ArrayBufferLike <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token operator">></span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> url <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> referer <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// `net` is an Electron module for performing network actions in the NodeJS landscape</span>
+    <span class="token keyword">const</span> response <span class="token operator">=</span> <span class="token keyword">await</span> net<span class="token punctuation">.</span><span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+      headers<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">"Referer"</span><span class="token punctuation">,</span> referer<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>reponse<span class="token punctuation">.</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">const</span> buffer <span class="token operator">=</span> <span class="token keyword">await</span> response<span class="token punctuation">.</span><span class="token function">arrayBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> buffer<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span></code></pre>
+
+<p>And call it:</p>
+<pre class="language-vue" data-language="vue"><code class="language-vue">&lt;script setup&gt;
+const data &#x3D; await window.ElectronAPI.fetchWithReferer(&#39;https:&#x2F;&#x2F;data-site.fake&#x2F;resource.png&#39;, &#39;https:&#x2F;&#x2F;partner-site.fake&#x2F;&#39;)
+&#x2F;&#x2F; 200 !
+&lt;script&gt;</code></pre>
+
+<p>That works for my use-case. If you find a way in which you can modify the Electron instance to accept custom referrer headers that would very likely be better, but this works just fine and doesn’t require you to do anything you wouldn’t do with Electron in general anyway.</p>
+
+  </article>
+
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1701646673060"></script>
+  
+
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div></body></html>
